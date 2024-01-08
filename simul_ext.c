@@ -132,6 +132,10 @@ int Renombrar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos, char *nombrea
 
 int Borrar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos,EXT_BYTE_MAPS *ext_bytemaps, EXT_SIMPLE_SUPERBLOCK *ext_superblock,
 char *nombre,  FILE *fich) {
+
+//Esta función se nos ha complicado en el último paso, pues conseguimos eliminar los datos y los bloques pero no hemos conseguido
+//que elimine el nombre de los archivos
+	
    (void) fich;
    (void) ext_superblock;
 
@@ -170,6 +174,11 @@ char *nombre,  FILE *fich) {
 int Copiar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos,
            EXT_BYTE_MAPS *ext_bytemaps, EXT_SIMPLE_SUPERBLOCK *ext_superblock,
            EXT_DATOS *memdatos, char *nombreorigen, char *nombredestino, FILE *fich) {
+
+
+//En esta funcion hemos tenido bastantes problemas, finalmente no hemos conseguido que copie los datos del archivo origen pero si que cree un nuevo archivo, 
+//que aunque de tamaño 0 y sin bloques tenga su inodo asociado
+	
     int inodoOrigen, inodoDestino, i, j;
 
     // Buscar el inodo del fichero de origen en el directorio
