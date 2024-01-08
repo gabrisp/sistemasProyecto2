@@ -203,15 +203,24 @@ int Copiar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos,
     ext_bytemaps->bmap_inodos[inodoDestino] = 1;
 
     // Copiar información del inodo de origen al inodo de destino
-    inodos->blq_inodos[inodoDestino].size_fichero = inodos->blq_inodos[inodoOrigen].size_fichero;
+	int tamano_fichero1 = inodos->blq_inodos[inodoDestino].size_fichero;
+	int tamano_fichero2 = inodos->blq_inodos[inodoOrigen].size_fichero;
+	
+    tamano_fichero1 = tamano_fichero2;
+	
 
-    for (j = 0; j < MAX_NUMS_BLOQUE_INODO; j++) {
-        inodos->blq_inodos[inodoDestino].i_nbloque[j] = inodos->blq_inodos[inodoOrigen].i_nbloque[j];
-    }
+	
+   
 
     // Copiar bloques de datos
     for (i = 0; i < MAX_NUMS_BLOQUE_INODO; i++) {
-        if (inodos->blq_inodos[inodoOrigen].i_nbloque[i] != NULL_BLOQUE) {
+		
+		int numero_bloque1 = inodos->blq_inodos[inodoDestino].i_nbloque[i] ;
+		int numero_bloque2 = inodos->blq_inodos[inodoOrigen].i_nbloque[i] ;
+		
+        numero_bloque1 = numero_bloque2;
+		
+        if (numero_bloque2 != NULL_BLOQUE) {
             // Buscar un bloque libre en el bytemap de bloques
             int bloqueDestino = -1;
             for (j = PRIM_BLOQUE_DATOS; j < MAX_BLOQUES_PARTICION; j++) {
@@ -233,7 +242,7 @@ int Copiar(EXT_ENTRADA_DIR *directorio, EXT_BLQ_INODOS *inodos,
             memcpy(memdatos[bloqueDestino - PRIM_BLOQUE_DATOS].dato, memdatos[inodos->blq_inodos[inodoOrigen].i_nbloque[i]].dato, SIZE_BLOQUE);
 
             // Actualizar el número de bloque en el inodo de destino
-            inodos->blq_inodos[inodoDestino].i_nbloque[i] = bloqueDestino;
+            numero_bloque1 = bloqueDestino;
         }
     }
 
